@@ -1,0 +1,8 @@
+{
+  "login": "Login",
+  "welcomeMessage": "Welcome To Our Attendance System",
+  "userNameHint": "UserName Or Phone Number",
+  "passwordHint": "Password",
+  "forgetPassword": "Forget Password?",
+  "loginButton": "Login"
+}

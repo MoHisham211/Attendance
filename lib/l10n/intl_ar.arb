@@ -1,0 +1,8 @@
+{
+  "login": "تسجيل الدخول",
+  "welcomeMessage": "مرحبًا بك في نظام الحضور لدينا",
+  "userNameHint": "اسم المستخدم أو رقم الهاتف",
+  "passwordHint": "كلمة المرور",
+  "forgetPassword": "هل نسيت كلمة المرور؟",
+  "loginButton": "تسجيل الدخول"
+}
