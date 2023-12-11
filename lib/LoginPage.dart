@@ -37,7 +37,6 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> _login() async {
     try {
-      // Set isLoading to true to show the progress bar
       setState(() {
         isLoading = true;
       });
@@ -45,25 +44,20 @@ class _LoginPageState extends State<LoginPage> {
         usernameController.text,
         passwordController.text,
       );
-      // Handle the response here
       final snackBar=SnackBar(content: Text ('مرحبا بك في برنامج تسجيل الحضور'));
       print(response);
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      // Set isLoading to false to hide the progress bar
       setState(() {
         isLoading = false;
       });
-
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => QRScannerScreen()),
       );
     } catch (error) {
-      // Handle errors here
       print(error);
       final snackBar=SnackBar(content: Text (error.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      // Set isLoading to false to hide the progress bar
       setState(() {
         isLoading = false;
       });
@@ -97,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   // Left image
                   Image.asset(
-                    'images/leftlogo.jpeg', // Replace with the path to your left image
+                    'images/leftlogo.jpeg',
                     width: 40,
                     height: 40,
                   ),
@@ -122,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   // Right image
                   Image.asset(
-                    'images/rightlogo.jpeg', // Replace with the path to your right image
+                    'images/rightlogo.jpeg',
                     width: 40,
                     height: 40,
                   ),
@@ -132,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 20,),
             Expanded(
               child: Container(
-                width: double.infinity, // Take up all available width
+                width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -169,7 +163,6 @@ class _LoginPageState extends State<LoginPage> {
                                 controller: usernameController,
                                 decoration: InputDecoration(
                                   hintText: "اسم المستخدم أو رقم الهاتف",
-                                  //hintText: "UserName Or Phone Number",
                                   hintStyle: TextStyle(color: Colors.grey),
                                   border: InputBorder.none,
                               ),
@@ -193,17 +186,11 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                       ),
-                     /* SizedBox(height: 40,),
-                      Text(
-                        "Forget Password?",
-                        style: TextStyle(color: Colors.grey),
-                      ),*/
                       SizedBox(height: 40,),
                       // Progress bar
                       if (isLoading)
                         CircularProgressIndicator(),
                       SizedBox(height: 20),
-
                       Container(
                         width: double.infinity, // Take up all available width
                         height: 50,
@@ -238,110 +225,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-
-/*return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ClipOval(
-              child: Image.asset(
-                'images/signon.png', // Replace with the path to your first logo
-                width: 100,
-                height: 100,
-              ),
-            ),
-            SizedBox(height: 10),
-            ClipOval(
-              child: Image.asset(
-                'images/signon.png', // Replace with the path to your second logo
-                width: 100,
-                height: 100,
-              ),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
-            ),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'Password'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _login,
-              child: Text('Login'),
-            ),
-          ],
-        ),
-      ),
-    );*/
-
-/*import 'package:flutter/material.dart';
-import 'ApiService.dart';
-
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  ApiService _apiService = ApiService();
-
-  Future<void> _login() async {
-    try {
-      Map<String, dynamic> response = await _apiService.login(
-        usernameController.text,
-        passwordController.text,
-      );
-
-      // Handle the response here
-      print(response);
-
-    } catch (error) {
-      // Handle errors here
-      print(error);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
-            ),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'Password'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _login,
-              child: Text('Login'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}*/
