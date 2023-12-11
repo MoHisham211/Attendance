@@ -111,10 +111,14 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
         } else {
           // Error handling for non-200 status code
           print('Error: ${response.statusCode}');
+          final snackBar=SnackBar(content: Text ('Error: ${response.statusCode}'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       } catch (e) {
         // Error handling for network issues or exceptions
         print('Error: $e');
+        final snackBar=SnackBar(content: Text ('Error: $e'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     }
   }
@@ -180,12 +184,28 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
 
       if (response.statusCode == 200) {
         print('Success! Response: ${response.body}');
+
+        Map<String, dynamic> parsedBody = json.decode(response.body);
+
+        if (parsedBody['saved'] == true) {
+
+          print('تم رفع الملف بنجاح');
+          final snackBar=SnackBar(content: Text ('تم رفع الملف بنجاح'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else {
+          print('يرجي العلم انه توجد بعض المشاكل في الملف');
+          final snackBar=SnackBar(content: Text ('يرجي العلم انه توجد بعض المشاكل في الملف'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+
         setState(() {
           isLoading = false;
         });
         // Handle the successful response here
       } else {
         print('Failed! Status Code: ${response.statusCode}, Body: ${response.body}');
+        final snackBar=SnackBar(content: Text ('Failed! Status Code: ${response.statusCode}, Body: ${response.body}'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
         // Handle the error response here
         setState(() {
           isLoading = false;
@@ -193,6 +213,8 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
       }
     } catch (e) {
       print('Error: $e');
+      final snackBar=SnackBar(content: Text ('Error: $e'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
       // Handle network or other exceptions here
       setState(() {
         isLoading = false;
@@ -310,37 +332,38 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
               ),
               Builder(
                 builder: (context) {
-                  return DropdownButton<String>(
-                    isExpanded: true,
-                    value: selectedValue,
-                    icon: Icon(
-                      Icons.arrow_downward,
-                      //color: Color(0xFF2c3e52),
-                      color: Color(0xffffffff),
-                    ),
-                    iconSize: 24,
-                    elevation: 16,
-                    style: TextStyle(color: Colors.white),
-                    //style: TextStyle(color: Color(0xFF2c3e52)),
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedValue = value!;
-                      });
-                    },
-                    items: data.map<DropdownMenuItem<String>>((Course course) {
-                      return DropdownMenuItem<String>(
-                        value: course.courseName,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Text(
-                            course.courseName,
-                            style: TextStyle(fontSize: 16),
-                            textDirection: TextDirection.rtl,
-                            textAlign: TextAlign.center,
+                  return Container(
+                    margin: EdgeInsets.all(8.0), // Adjust the margin as needed
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      value: selectedValue,
+                      icon: Icon(
+                        Icons.arrow_downward,
+                        color: Color(0xffffffff),
+                      ),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: TextStyle(color: Colors.grey),
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedValue = value!;
+                        });
+                      },
+                      items: data.map<DropdownMenuItem<String>>((Course course) {
+                        return DropdownMenuItem<String>(
+                          value: course.courseName,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text(
+                              course.courseName,
+                              style: TextStyle(fontSize: 16),
+                              textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                        ),
-                      );
-                    }).toList(),
+                        );
+                      }).toList(),
+                    ),
                   );
                 },
               ),
@@ -352,7 +375,7 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
               Container(
                 width: double.infinity,
                 // Take up all available width
-                height: 50,
+                height: 40,
                 margin: EdgeInsets.symmetric(horizontal: 50),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),

@@ -92,23 +92,40 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 80,),
             Padding(
               padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    "تسجيل الدخول",
-                    style: TextStyle(color: Colors.white, fontSize: 35),
-                    textDirection: TextDirection.rtl
-                    ,textAlign: TextAlign.right,
+                  // Left image
+                  Image.asset(
+                    'images/leftlogo.jpeg', // Replace with the path to your left image
+                    width: 40,
+                    height: 40,
                   ),
-                  SizedBox(height: 10,),
-                  Text(
-                    textDirection: TextDirection.rtl
-                    ,textAlign: TextAlign.right,
-                    "مرحبًا بك في نظام الحضور لدينا",
-                    //"Welcome To Our Attendance System",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  )
+                  // Text
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        "تسجيل الدخول",
+                        style: TextStyle(color: Colors.white, fontSize: 30),
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 5,),
+                      Text(
+                        "مرحبًا بك في نظام الحضور لدينا",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                  // Right image
+                  Image.asset(
+                    'images/rightlogo.jpeg', // Replace with the path to your right image
+                    width: 40,
+                    height: 40,
+                  ),
                 ],
               ),
             ),

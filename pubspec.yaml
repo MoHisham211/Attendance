@@ -65,6 +65,8 @@ dev_dependencies:
 flutter:
   assets:
     - images/signon.png
+    - images/leftlogo.jpeg
+    - images/rightlogo.jpeg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
